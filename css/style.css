@@ -1,1 +1,43 @@
-<link>
+* {
+    margin: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+   font-family: "Poppins", sans-serif;
+  }
+
+h1 {
+    background-color: rgb(244, 204, 211);
+    color: rgb(244, 150, 166);
+    font-size: xx-large;
+    padding: 2%;
+}
+
+body {
+    
+    background-size: 100%;
+    background-color: rgb(244, 227, 230);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%)translateY(-50%);
+    text-align: center;
+  }
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: rgb(221, 114, 132);
+  }
+
+.game-graphic {
+    max-height: 33vmin;
+    margin-bottom: 20px;
+  }
+  
+  .hidden {
+   display: none;
+  }
+
+  .hidden-start {
+    display: none;
+   }
