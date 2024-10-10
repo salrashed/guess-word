@@ -14,7 +14,7 @@ h1 {
 
 body {
     
-    background-size: 100%;
+    background-size:100%;
     background-color: rgb(244, 227, 230);
     position: absolute;
     top: 50%;
@@ -32,6 +32,10 @@ body {
 .game-graphic {
     max-height: 33vmin;
     margin-bottom: 20px;
+  }
+  img {
+    max-height: 80%;
+    max-width: 80%;
   }
   
   .hidden {

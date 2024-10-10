@@ -7,17 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Guess The Word</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <h1 id="title"> Guess the word </h1>
   <div id="welcome">-Enter your guess-
-    <div id="img">
-      <img class="front-face hidden" src="tiger.jpg">
-      <img class="front-face hidden" src="cat.jpg">
-      <img class="front-face hidden" src="bear.jpg">
-      <img class="front-face hidden" src="dog.jpg">
-      <img class="front-face hidden" src="Swan.jpg">
+
+    <div id="img" >
+      <img id="tiger" class="hidden" src="tiger.jpg">
+      <img id="cat" class="hidden" src="cat.jpg">
+      <img id="bear" class="hidden" src="bear.jpg">
+      <img id="dog" class="hidden" src="dog.jpg">
+      <img id="swan" class="hidden" src="Swan.jpg">
     </div>
   <p id="displayWord"></p>
   <p>
@@ -28,17 +28,20 @@
 </div>
 
   
-    <button id="start" class="hidden-start">start</button>
+    <button id="start">start</button>
 
-    <div id="startButton"class="hidden" >
-    <button submitButton="button">submit</button>
-    <button resetButton="button">reset</button>
-  </div>
-  <div id="youWin" style="display: "hidden"></div>
+    <div id="submit-reset-container" class="hidden" >
+      <button id="submitButton">submit</button>
+      <button id="resetButton">reset</button>
+    </div>
+
+  <div id="youWin" class="hidden">
     <h2>You Win</h2>
     <div>
-        <button onclick="restart()">Play again?</button>
+        <button id="restart-button">Play again?</button>
     </div>
+  </div>
+    
 </div>
 <div id="youLose" style="display: none">
   <h1>You Lose</h1>
