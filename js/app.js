@@ -3,7 +3,7 @@
 const words = [ "tiger","cat","bear","dog","swan"];
 const inputs = document.querySelector(".inputs")
 const wrongLetter = document.querySelector(".wrong-letter span")
-const typingInput = document.querySelector(".typing-input");
+const typingInput = document.querySelector("#typing-input");
 const startButton = document.querySelector("#start");
 const submitContainer = document.querySelector("#submit-reset-container");
 const tiger = document.querySelector("#tiger");
@@ -26,10 +26,17 @@ let correctLetters = [];
 
 /*----- Cached Element References  -----*/
 
-const handleAddComment = (event) => {
+const handleAddText = (event) => {
     if (!inputEl.value) {
       return;
-    }}
+    }
+    const commentEl = document.createElement('li');
+    commentEl.textContent = inputEl.value;
+    commentListElement.appendChild(commentEl);
+    inputEl.value = '';
+  };
+  
+
 
 /*-------------- Functions -------------*/
 
@@ -75,7 +82,7 @@ function goToNextWord() {
     currentWordIndex++;
     attempts = 0;
     guessedLetters = [];
-    updateDisplay();
+//    updateDisplay();
 }
 
 let html = "";
@@ -93,7 +100,7 @@ startButton.addEventListener("click", (e) => {
 });
 
 submitContainer.addEventListener("click", (e) => {
-        if (e.target.id === "submit") {
+        if (e.target.id === "submitButton") {
         if (typingInput.value === word) {
                 gameWin();
                 goToNextWord();
@@ -107,9 +114,39 @@ submitContainer.addEventListener("click", (e) => {
         } else if (e.target.id === "reset") {
             restart();
             goToNextWord();
-        
-    tiger.classList.add("hidden");
+     if (e.target.id === "submit") {
+    if (typingInput.value === word) {
+     tiger.classList.add("hidden");
     cat.classList.remove("hidden");
+    cat.classList.add("hidden");
+    bear.classList.remove("hidden");
+    bear.classList.add("hidden");
+    dog.classList.remove("hidden");
+    dog.classList.add("hidden");
+    swan.classList.remove("hidden");
+     }
+}}});
+
+
+/**
+ * 
+ * submitContainer.addEventListener("click", (e) => {
+    if (e.target.id === "submit") {
+    if (typingInput.value === word) {
+            gameWin();
+            goToNextWord();
+        } else {
+            attempts++;
+            if (attempts === 10) {
+                gameLose();
+                goToNextWord();
+            }
+        }
+    } else if (e.target.id === "reset") {
+        restart();
+        goToNextWord();
+    
+
 }});
 
 submitContainer.addEventListener("click", (e) => {
@@ -128,8 +165,9 @@ submitContainer.addEventListener("click", (e) => {
         restart();
         goToNextWord();
     
-cat.classList.add("hidden");
-bear.classList.remove("hidden");
+
+
+console.log('bear');
 }});
 
 submitContainer.addEventListener("click", (e) => {
@@ -148,26 +186,6 @@ submitContainer.addEventListener("click", (e) => {
         restart();
         goToNextWord();
     
-bear.classList.add("hidden");
-dog.classList.remove("hidden");
-}});
 
-submitContainer.addEventListener("click", (e) => {
-    if (e.target.id === "submit") {
-    if (typingInput.value === word) {
-            gameWin();
-            goToNextWord();
-        } else {
-            attempts++;
-            if (attempts === 10) {
-                gameLose();
-                goToNextWord();
-            }
-        }
-    } else if (e.target.id === "reset") {
-        restart();
-        goToNextWord();
-    
-dog.classList.add("hidden");
-swan.classList.remove("hidden");
 }});
+ */
