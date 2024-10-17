@@ -12,44 +12,15 @@
 <h1 id="title"> Guess the word </h1>
   <div id="welcome">-Enter your guess-
 
-    <div id="img" >
-      <img id="tiger" class="hidden" src="tiger.jpg">
-      <img id="cat" class="hidden" src="cat.jpg">
-      <img id="bear" class="hidden" src="bear.jpg">
-      <img id="dog" class="hidden" src="dog.jpg">
-      <img id="swan" class="hidden" src="Swan.jpg">
+    <div class="img" >
+
     </div>
-  <p id="displayWord"></p>
-  <p>
-    <input type="text"
-    maxlength="5"
-    id="typing-input">
-  </p>
+  <p class="displayWord"></p>
 </div>
-
-  
-    <button id="start">start</button>
-
-    <div id="submit-reset-container" class="hidden" >
-      <button id="submitButton">submit</button>
-      <button id="resetButton">reset</button>
+<div class="model" class="hidden"></div>
+<div class="keyboard"></div>
+ <div id="guess"></div>
+    <button class="playAgain">Play Again</button>  
     </div>
-
-  <div id="youWin" class="hidden">
-    <h2>You Win</h2>
-    <div>
-        <button id="restart-button">Play again?</button>
-    </div>
-  </div>
-    
-</div>
-<div id="youLose" style="display: none">
-  <h1>You Lose</h1>
-  <div>
-      <button onclick="restart()">Play again?</button>
-  </div>
-  <p id="correctWordWas"></p>
-</div>
-
 </body>
 </html>

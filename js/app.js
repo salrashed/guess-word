@@ -1,191 +1,104 @@
 /*-------------- Constants -------------*/
 
-const words = [ "tiger","cat","bear","dog","swan"];
-const inputs = document.querySelector(".inputs")
-const wrongLetter = document.querySelector(".wrong-letter span")
-const typingInput = document.querySelector("#typing-input");
-const startButton = document.querySelector("#start");
-const submitContainer = document.querySelector("#submit-reset-container");
-const tiger = document.querySelector("#tiger");
-const cat = document.querySelector("#cat");
-const bear = document.querySelector("#bear");
-const dog = document.querySelector("#dog");
-const swan  = document.querySelector("#swan");
+const wordList = [
+    {word: "tiger",},
+    {word: "cat",},
+    {word: "bear",},
+    {word: "dog",},
+    {word: "swan",},
+]
+
+const maxAttempts = 5;
 
 /*---------- Variables (state) ---------*/
 
-var currentWordIndex = 0;
-var attempts = 0;
-var guessedLetters = [];
-var wins = 0;
-var losses = 0;
-let word = []
-let maxGuesses = [];
-let incorrectLetters = [];
+let currentLetter;
+let currentWord;
+let incorrectAttempts = 0;
 let correctLetters = [];
 
 /*----- Cached Element References  -----*/
 
-const handleAddText = (event) => {
-    if (!inputEl.value) {
-      return;
-    }
-    const commentEl = document.createElement('li');
-    commentEl.textContent = inputEl.value;
-    commentListElement.appendChild(commentEl);
-    inputEl.value = '';
-  };
-  
-
+const keyboardEl = document.querySelector(".keyboard");
+const displayWordEl = document.querySelector(".displayWord");
+const imgEl = document.querySelector(".img");
+const playAgainEl = document.querySelector(".playAgain");
+const model = document.querySelector(".model");
+const guessEl = document.querySelector("#guess");
 
 /*-------------- Functions -------------*/
 
-function gameLose() {
-    
-    document.getElementById('youLose').style.display = 'block';
-    document.getElementById("correctWordWas").innerHTML = "The correct word was " + word;
-}
-function gameWin() {
-    
-    document.getElementById('youWin').style.display = 'block';
-}
-function restart() {
-    
-    document.getElementById('youLose').style.display = 'none';
-    document.getElementById('youWin').style.display = 'none';
+for(let i=97 ; i<=122 ; i++) {
+    const button = document.createElement("button");
+    button.innerText = String.fromCharCode(i);
+    keyboardEl.appendChild(button); 
+    button.addEventListener('click', (event) => {
+        event.target.innerText = String.fromCharCode(i);
+        currentLetter = event.target.innerText;
+        button.disabled = true;
+        init();
+    });
+};
+
+const reset = () => {
+    correctLetters = [];
+    incorrectAttempts = 0;
+    model.classList.add("hidden");
+    guessEl.innerText = `${incorrectAttempts} / ${maxAttempts}`;
+    keyboardEl.querySelectorAll("button").forEach(button => button.disabled = false);
 }
 
+const getRandom = () => {
+    model.classList.add("hidden");
+    const {word} = wordList[Math.floor(Math.random()* wordList.length)];
+    currentWord = word;
+    imgEl.innerHTML += `<img id="${word}" class="hidden" src="${word}.jpg">`;
+    reset();
+    displayWordEl.innerHTML = word.split("").map(()=>`<li class="letter"></li>`).join("");
+};
 
-
-function firstWord() {
-    let
-    return (currentWordLetters().map(function (letter) {
-        if (guessedLetters.indexOf(letter) === -1) {
-            return "_";
-        } else {
-            return letter;
+const gameOver = (win) => {
+    
+        if (win === true) {
+            const text = 'You found the word:';
+            model.querySelector("img");
+            model.innerText = 'Congratulations!';
+            model.innerHTML = `${text} <b>${currentWord}</b>`;
+            model.classList.remove("hidden");
+        } else if (win === false) {
+            const text1 = 'The correct word is:';
+            model.querySelector("img");
+            model.querySelector("h4").innerText = 'GAME OVER!!!';
+            model.querySelector("p").innerHTML = `${text1} <b>${currentWord}</b>`;
+            model.classList.remove("hidden");
         }
+    
+}
+
+const init = () => {
+    if(currentWord.includes (currentLetter)) {
+        console.log(`${currentLetter} exist in word`);
+        [...currentWord].forEach((letter, index) => {
+            if(letter === currentLetter) {
+                correctLetters.push(currentLetter);
+                displayWordEl.querySelectorAll("li")[index].innerText = letter;
+                displayWordEl.querySelectorAll("li")[index].classList.add("guessed");
+            }
+        });
+    } else {
+        incorrectAttempts++;
+        console.log(`${currentLetter} does not exist in word`);
+    };
+  
+    guessEl.innerText = `${incorrectAttempts} / ${maxAttempts}`;
+    if (correctLetters.length === currentWord.length) {
+        gameOver(true);
     }
-    ));}
+};
 
-function wordStart() {
-    var wordLength = word.length;
-    var wordL_ = "";
-    var count = wordLength;
-    while (count > 0) {
-            wordGuess.push("<div class='wordBlocks'></div>");
-        count -= 1;
-    }
-}
+ getRandom();
 
-function goToNextWord() {
-    currentWordIndex++;
-    attempts = 0;
-    guessedLetters = [];
-//    updateDisplay();
-}
-
-let html = "";
-for (let i = 0; i < word.length; i++) {
-    html += `<input type="text" disabled>`;
-    inputs.innerHTML = html;
-}
 
 /*----------- Event Listeners ----------*/
 
-startButton.addEventListener("click", (e) => {
-    submitContainer.classList.remove("hidden");
-   tiger.classList.remove("hidden");
-    startButton.classList.add("hidden");
-});
-
-submitContainer.addEventListener("click", (e) => {
-        if (e.target.id === "submitButton") {
-        if (typingInput.value === word) {
-                gameWin();
-                goToNextWord();
-            } else {
-                attempts++;
-                if (attempts === 10) {
-                    gameLose();
-                    goToNextWord();
-                }
-            }
-        } else if (e.target.id === "reset") {
-            restart();
-            goToNextWord();
-     if (e.target.id === "submit") {
-    if (typingInput.value === word) {
-     tiger.classList.add("hidden");
-    cat.classList.remove("hidden");
-    cat.classList.add("hidden");
-    bear.classList.remove("hidden");
-    bear.classList.add("hidden");
-    dog.classList.remove("hidden");
-    dog.classList.add("hidden");
-    swan.classList.remove("hidden");
-     }
-}}});
-
-
-/**
- * 
- * submitContainer.addEventListener("click", (e) => {
-    if (e.target.id === "submit") {
-    if (typingInput.value === word) {
-            gameWin();
-            goToNextWord();
-        } else {
-            attempts++;
-            if (attempts === 10) {
-                gameLose();
-                goToNextWord();
-            }
-        }
-    } else if (e.target.id === "reset") {
-        restart();
-        goToNextWord();
-    
-
-}});
-
-submitContainer.addEventListener("click", (e) => {
-    if (e.target.id === "submit") {
-    if (typingInput.value === word) {
-            gameWin();
-            goToNextWord();
-        } else {
-            attempts++;
-            if (attempts === 10) {
-                gameLose();
-                goToNextWord();
-            }
-        }
-    } else if (e.target.id === "reset") {
-        restart();
-        goToNextWord();
-    
-
-
-console.log('bear');
-}});
-
-submitContainer.addEventListener("click", (e) => {
-    if (e.target.id === "submit") {
-    if (typingInput.value === word) {
-            gameWin();
-            goToNextWord();
-        } else {
-            attempts++;
-            if (attempts === 10) {
-                gameLose();
-                goToNextWord();
-            }
-        }
-    } else if (e.target.id === "reset") {
-        restart();
-        goToNextWord();
-    
-
-}});
- */
+playAgainEl.addEventListener('click', getRandom);
